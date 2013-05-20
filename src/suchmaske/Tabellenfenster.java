@@ -15,49 +15,46 @@ public class Tabellenfenster extends JFrame {
 
 	private JPanel contentPane;
 	private JTable ergebnistabelle;
-	int zeilenanzahl;
-	int spaltenanzahl;
-	int wert;
-	int zeile;
-	int spalte;
+	private int zeilenanzahl;
+	private int spaltenanzahl;
+	
 	private LinkedList<LinkedList<String>> ergebnisliste;
 	
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Tabellenfenster frame = new Tabellenfenster();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 	
 	private void tabellefuellen(){
-		LinkedList<String> zwischenliste=new LinkedList();
-		zeilenanzahl= ergebnisliste.size();
-		zwischenliste=ergebnisliste.getFirst();
-		spaltenanzahl=zwischenliste.size();
+		LinkedList<String> zwischenliste=new LinkedList<String>();
+		String wert;
+		int zeile;
+		int spalte;
+		for(zeile=1;zeile<zeilenanzahl;zeile++){
+			zwischenliste=ergebnisliste.get(zeile-1);
+			for(spalte=0; spalte<spaltenanzahl; spalte++){
+				wert=zwischenliste.get(spalte);
+				ergebnistabelle.setValueAt(wert, zeile, spalte);
+			}
+		}
 		
-		ergebnistabelle.setValueAt(wert, zeile, spalte);
 	}
 	/**
 	 * Create the frame.
 	 */
-	public Tabellenfenster() {
+	public Tabellenfenster(LinkedList<LinkedList<String>> ergebnisse) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		//		contentPane.setLayout(null);
-				
+				ergebnisliste=ergebnisse;
+				zeilenanzahl= ergebnisliste.size()+1;
+				LinkedList<String> zwischenliste=new LinkedList<String>();
+				zwischenliste=ergebnisliste.getFirst();
+				spaltenanzahl=zwischenliste.size();
 				ergebnistabelle = new JTable(zeilenanzahl, spaltenanzahl);
 				tabellefuellen();
 				ergebnistabelle.setForeground(Color.BLACK);
