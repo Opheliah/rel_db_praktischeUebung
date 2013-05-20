@@ -117,6 +117,7 @@ public class ErsterEntwurf extends JFrame {
 	 * Create the dialog.
 	 */
 	
+	
 	private void setCombParameter(int cboxparamindex){
 		if(cboxparamindex == 0){
 			c1box_param=leer;
@@ -650,8 +651,16 @@ public class ErsterEntwurf extends JFrame {
 		
 		
 		
-		butBenutzerdaten.setBounds(42, 377, 100, 36);
 		
+		
+		butBenutzerdaten.setBounds(42, 377, 100, 36);
+		butBenutzerdaten.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e){
+				BenutzerdatenEingabe loginWindow = new BenutzerdatenEingabe();
+				loginWindow.setVisible(true);
+			}
+		});
 		contentPanel.add(butBenutzerdaten);
 		
 		butHilfe.setBounds(380, 377, 90, 36);
