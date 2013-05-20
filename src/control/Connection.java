@@ -4,8 +4,8 @@ import java.sql.*;
 
 public class Connection {
 
-	private static String address = 
-      "jdbc:oracle:thin:@dbvm07.iai.uni-bonn.de:1521:lehre";
+	private static String address = "adressHere";
+     /* "jdbc:oracle:thin:@dbvm07.iai.uni-bonn.de:1521:lehre"; */
 
 	private static String user = "usernameHere";
     private static String pass = "passHere";

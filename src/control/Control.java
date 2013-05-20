@@ -6,10 +6,12 @@ import java.sql.*;
 public class Control {
  
   public static LinkedList<LinkedList<String>> 
-    searchTitle(String searchquery, LinkedList<String[]> options){
-	  return Search.title(searchquery, options);
+    searchTitle(String select, String searchquery, 
+      LinkedList<String[]> options){
+	    return Search.search(select,searchquery, options);
   }	
-	
+  
+  /*
   public static LinkedList<LinkedList<String>> 
     searchPerson(String searchquery, LinkedList<String[]> options){
 	  return Search.person(searchquery, options);
@@ -19,6 +21,7 @@ public class Control {
     searchCompany(String searchquery, LinkedList<String[]> options){
 	  return Search.company(searchquery, options);		  
   }
+  */
   
   public static LinkedList<LinkedList<String>>
     getDetailedViewTitle(String name){

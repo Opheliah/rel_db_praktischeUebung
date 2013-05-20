@@ -23,7 +23,7 @@ public class Details {
 	         "cast_info.person_role_id = char_name.id AND cast_info.role_id" +
 	         " = role_type.id"  );
 	       
-		 return resultSetToStrings(res);
+	     return SqlResultToList.convert(res);
 		 }
 		 catch(SQLException s){
 		   System.out.println(s.getMessage());
@@ -43,7 +43,7 @@ public class Details {
 			  "cast_info.person_role_id = char_name.id AND cast_info.role_id" +
 			  " = role_type.id"  );
 			       
-		  return resultSetToStrings(res);
+		  return SqlResultToList.convert(res);
 		}
 		catch(SQLException s){
 		  System.out.println(s.getMessage());
@@ -61,35 +61,11 @@ public class Details {
 			    "WHERE title.id = movie_companies.movie_id AND title.kind_id = "
 			    + "kind_type.id");
 				       
-			  return resultSetToStrings(res);
+			  return SqlResultToList.convert(res);
 			}
 			catch(SQLException s){
 			  System.out.println(s.getMessage());
 			  return null;
 			}    
-	  }
-	  
-	  static LinkedList<LinkedList<String>> resultSetToStrings(ResultSet res)
-	    throws SQLException{
-	       
-		   LinkedList<LinkedList<String>> ret = 
-		  	         new LinkedList<LinkedList<String>>();
-		   
-		   ResultSetMetaData meta = res.getMetaData();
-	       int numCol = meta.getColumnCount();
-	       LinkedList<String> columnnames = new LinkedList<String>();
-	       for(int i = 1; i <= numCol; ++i){
-	    	   columnnames.add(meta.getColumnName(i)); 
-	       }
-	       ret.add(columnnames);
-	       	     
-	       while(res.next()){
-	         LinkedList<String> row  = new LinkedList<String>();
-	    	 for(int i = 1; i <= numCol; ++i){
-	           row.add(res.getString(i));	 
-	         }
-	    	 ret.add(row);
-	       }
-	       return ret;  
 	  }
 }
