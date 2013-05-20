@@ -31,8 +31,8 @@ public class Tabellenfenster extends JFrame {
 		String wert;
 		int zeile;
 		int spalte;
-		for(zeile=1;zeile<zeilenanzahl;zeile++){
-			zwischenliste=ergebnisliste.get(zeile-1);
+		for(zeile=0;zeile<zeilenanzahl;zeile++){
+			zwischenliste=ergebnisliste.get(zeile);
 			for(spalte=0; spalte<spaltenanzahl; spalte++){
 				wert=zwischenliste.get(spalte);
 				ergebnistabelle.setValueAt(wert, zeile, spalte);
@@ -47,19 +47,20 @@ public class Tabellenfenster extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		//		contentPane.setLayout(null);
 				ergebnisliste=ergebnisse;
-				zeilenanzahl= ergebnisliste.size()+1;
+				zeilenanzahl= ergebnisliste.size();
 				LinkedList<String> zwischenliste=new LinkedList<String>();
 				zwischenliste=ergebnisliste.getFirst();
 				spaltenanzahl=zwischenliste.size();
 				ergebnistabelle = new JTable(zeilenanzahl, spaltenanzahl);
 				tabellefuellen();
+				ergebnistabelle.setRowHeight(20);
 				ergebnistabelle.setForeground(Color.BLACK);
 				ergebnistabelle.setGridColor(Color.BLACK);
-				ergebnistabelle.setBounds(110, 90, 400, 280);
+				ergebnistabelle.setBounds(200, 100, 400, 280);
 				contentPane.add(ergebnistabelle);
 	}
 }

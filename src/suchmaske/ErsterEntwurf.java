@@ -23,6 +23,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.UIManager;
@@ -95,7 +96,7 @@ public class ErsterEntwurf extends JFrame {
 	private final JButton butBenutzerdaten = new JButton("einloggen");
 	private int cboxauswahlindex;
 	
-	private List<String[]> suchdaten=new ArrayList<String[]>();
+	private LinkedList<LinkedList<String>> suchdaten=new LinkedList<LinkedList<String>>();
 	
 	/**
 	 * Launch the application.
@@ -115,6 +116,7 @@ public class ErsterEntwurf extends JFrame {
 	/**
 	 * Create the dialog.
 	 */
+	
 	
 	private void setCombParameter(int cboxparamindex){
 		if(cboxparamindex == 0){
@@ -619,16 +621,28 @@ public class ErsterEntwurf extends JFrame {
 		butSuchestarten.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
-				//Methodenaufruf und Parameter??bergabe
-				String[] erstezeile={c1suchfeld, c2suchfeld, eigenschaftEingabe};
-				String[] zweitezeile={c3suchfeld, c4suchfeld, eigenschaftEingabe1};
-				String[] drittezeile={c5suchfeld, c6suchfeld, eigenschaftEingabe2};
-				String[] viertezeile={c7suchfeld, c8suchfeld, eigenschaftEingabe3};
+				//Methodenaufruf und Parameteruebergabe:
+				LinkedList<String> erstezeile=new LinkedList<String>();
+				String[] einlesen1={c1suchfeld, c2suchfeld, eigenschaftEingabe};
+				LinkedList<String> zweitezeile=new LinkedList<String>();
+				String[] einlesen2={c3suchfeld, c4suchfeld, eigenschaftEingabe1};
+				LinkedList<String> drittezeile=new LinkedList<String>();
+				String[] einlesen3={c5suchfeld, c6suchfeld, eigenschaftEingabe2};
+				LinkedList<String> viertezeile=new LinkedList<String>();
+				String[] einlesen4={c7suchfeld, c8suchfeld, eigenschaftEingabe3};
+				int i;
+				for(i=0; i<3; i++){
+						erstezeile.add(i, einlesen1[i]);
+						zweitezeile.add(i, einlesen2[i]);
+						drittezeile.add(i, einlesen3[i]);
+						viertezeile.add(i, einlesen4[i]);
+					
+					
+				}
 				suchdaten.add(0, erstezeile);
 				suchdaten.add(1, zweitezeile);
 				suchdaten.add(2, drittezeile);
 				suchdaten.add(3, viertezeile);
-				//methodeXY(ergebnisauswahl, sucheingabe, suchdaten);
 				
 			}
 		});
@@ -637,8 +651,16 @@ public class ErsterEntwurf extends JFrame {
 		
 		
 		
-		butBenutzerdaten.setBounds(42, 377, 100, 36);
 		
+		
+		butBenutzerdaten.setBounds(42, 377, 100, 36);
+		butBenutzerdaten.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e){
+				BenutzerdatenEingabe loginWindow = new BenutzerdatenEingabe();
+				loginWindow.setVisible(true);
+			}
+		});
 		contentPanel.add(butBenutzerdaten);
 		
 		butHilfe.setBounds(380, 377, 90, 36);
