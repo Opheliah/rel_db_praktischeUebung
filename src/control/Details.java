@@ -71,17 +71,24 @@ public class Details {
 	  
 	  static LinkedList<LinkedList<String>> resultSetToStrings(ResultSet res)
 	    throws SQLException{
-	       ResultSetMetaData meta = res.getMetaData();
+	       
+		   LinkedList<LinkedList<String>> ret = 
+		  	         new LinkedList<LinkedList<String>>();
+		   
+		   ResultSetMetaData meta = res.getMetaData();
 	       int numCol = meta.getColumnCount();
-	       LinkedList<LinkedList<String>> ret = 
-	  	         new LinkedList<LinkedList<String>>();
-	       Iterator<LinkedList<String>> it = ret.iterator();
+	       LinkedList<String> columnnames = new LinkedList<String>();
+	       for(int i = 1; i <= numCol; ++i){
+	    	   columnnames.add(meta.getColumnName(i)); 
+	       }
+	       ret.add(columnnames);
+	       	     
 	       while(res.next()){
-	         LinkedList<String> row = it.next();
-	         row = new LinkedList<String>();
-	    	 for(int i = 0; i < numCol; ++i){
+	         LinkedList<String> row  = new LinkedList<String>();
+	    	 for(int i = 1; i <= numCol; ++i){
 	           row.add(res.getString(i));	 
 	         }
+	    	 ret.add(row);
 	       }
 	       return ret;  
 	  }

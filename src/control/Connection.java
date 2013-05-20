@@ -20,6 +20,7 @@ public class Connection {
           setUser(user);
           setPass(pass);
           setConn(conn);
+          System.out.println("sucessfully connected");
           return(true);
     	}
     	catch(SQLException s){
