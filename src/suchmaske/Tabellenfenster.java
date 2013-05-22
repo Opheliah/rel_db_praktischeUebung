@@ -1,29 +1,53 @@
 package suchmaske;
 
-import java.awt.BorderLayout;
-
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTable;
-import java.awt.Color;
 import java.util.LinkedList;
 
-public class Tabellenfenster extends JFrame {
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
+import java.awt.Color;
+import java.awt.GridLayout;
+
+public class Tabellenfenster extends JFrame {
+	
 	private JPanel contentPane;
 	private JTable ergebnistabelle;
 	private int zeilenanzahl;
 	private int spaltenanzahl;
 	
 	private LinkedList<LinkedList<String>> ergebnisliste;
+	 
 	
+	public Tabellenfenster(LinkedList<LinkedList<String>> ergebnisse) {
+		getContentPane().setLayout(null);
+		setBounds(100, 100, 450, 400);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JButton btnDetailansicht = new JButton("Detailansicht");
+		btnDetailansicht.setBounds(327, 6, 117, 29);
+		getContentPane().add(btnDetailansicht);
+		
+		ergebnisliste=ergebnisse;
+		zeilenanzahl= ergebnisliste.size();
+		LinkedList<String> zwischenliste=new LinkedList<String>();
+		zwischenliste=ergebnisliste.getFirst();
+		spaltenanzahl=zwischenliste.size();
+		
+		
+		ergebnistabelle = new JTable(zeilenanzahl, spaltenanzahl);
+		ergebnistabelle.setBounds(6, 49, 438, 323);
+		ergebnistabelle.setForeground(Color.BLACK);
+		ergebnistabelle.setGridColor(Color.BLACK);
+		tabellefuellen();
+		ergebnistabelle.setAutoscrolls(true);
+		
+		getContentPane().add(ergebnistabelle);
+	}
 
-	/**
-	 * Launch the application.
-	 */
 	
 	
 	private void tabellefuellen(){
@@ -39,28 +63,5 @@ public class Tabellenfenster extends JFrame {
 			}
 		}
 		
-	}
-	/**
-	 * Create the frame.
-	 */
-	public Tabellenfenster(LinkedList<LinkedList<String>> ergebnisse) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		//		contentPane.setLayout(null);
-				ergebnisliste=ergebnisse;
-				zeilenanzahl= ergebnisliste.size();
-				LinkedList<String> zwischenliste=new LinkedList<String>();
-				zwischenliste=ergebnisliste.getFirst();
-				spaltenanzahl=zwischenliste.size();
-				ergebnistabelle = new JTable(zeilenanzahl, spaltenanzahl);
-				tabellefuellen();
-				ergebnistabelle.setRowHeight(20);
-				ergebnistabelle.setForeground(Color.BLACK);
-				ergebnistabelle.setGridColor(Color.BLACK);
-				ergebnistabelle.setBounds(200, 100, 400, 280);
-				contentPane.add(ergebnistabelle);
 	}
 }
