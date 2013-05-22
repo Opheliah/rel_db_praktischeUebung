@@ -51,6 +51,9 @@ public class ErsterEntwurf extends JFrame {
 	private JComboBox comboBox6=new JComboBox();
 	private JComboBox comboBox7=new JComboBox();
 	private JComboBox comboBox8=new JComboBox();
+	private JComboBox undOderBox1=new JComboBox();
+	private JComboBox undOderBox2=new JComboBox();
+	private JComboBox undOderBox3=new JComboBox();
 	
 	private String[] auswahlmoeglichkeiten={"--nicht ausgew\u00E4hlt--", "alles ausw\u00E4hlen", "Person", "Titel", "Produktionsjahr", "Film-/Serienrolle", "Mitarbeiterfunktion", "Filmgesellschaft"};
 	private String[] auswahl={"--nicht ausgew\u00E4hlt--", "Person", "Titel", "Produktionsjahr", "Film-/Serienrolle", "Mitarbeiterfunktion", "Filmgesellschaft"};
@@ -63,6 +66,7 @@ public class ErsterEntwurf extends JFrame {
 	private String[] relation1 = new String[] {"--nicht ausgew\u00E4hlt--","ist gleich", "ist ungleich"};
 	private String[] relation2 = new String[] {"--nicht ausgew\u00E4hlt--","ist gleich", "ist ungleich", "ist groesser", "ist kleiner", "ist groesser/gleich", "ist kleiner/gleich"};
 	private String[] leer = new String[] {};
+	private String [] undoder=new String[] {"und", "oder"};
 	
 	private String[] c1box_param={};
 	private String[] c2box_param={};
@@ -87,16 +91,23 @@ public class ErsterEntwurf extends JFrame {
 	private String eigenschaftEingabe2;
 	private String eigenschaftEingabe3;
 	private String eigenschaftEingabe;
+	private String undoderAuswahl1;
+	private String undoderAuswahl2;
+	private String undoderAuswahl3;
 	
 	private String benutzername;
 	private String passwort;
 	
 	private final JButton butSuchestarten = new JButton("Suche starten");
-	private final JButton butHilfe = new JButton("Hilfe");
+	private final JButton butHilfe = new JButton("?");
 	private final JButton butBenutzerdaten = new JButton("einloggen");
+	private final JButton butschliessen = new JButton("erweiterte Einstellungen schliessen");
+	
 	private int cboxauswahlindex;
 	
 	private LinkedList<LinkedList<String>> suchdaten=new LinkedList<LinkedList<String>>();
+	private final JButton btnMerklisteBearbeiten = new JButton("Merklisten bearbeiten");
+	private final JButton btnNewButton = new JButton("neue Merkliste");
 	
 	/**
 	 * Launch the application.
@@ -105,7 +116,7 @@ public class ErsterEntwurf extends JFrame {
 		try {
 			ErsterEntwurf dialog = new ErsterEntwurf();
 			dialog.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			dialog.setSize(550, 470);
+			dialog.setSize(670, 490);
 			dialog.setVisible(true);
 			
 		} catch (Exception e) {
@@ -140,10 +151,10 @@ public class ErsterEntwurf extends JFrame {
 			c8box_param=leer;
 		}
 		else if(cboxparamindex==2){
-			c1box_param=auswahl1;
-			c3box_param=auswahl1;
-			c5box_param=auswahl1;
-			c7box_param=auswahl1;
+			c1box_param=auswahl;
+			c3box_param=auswahl;
+			c5box_param=auswahl;
+			c7box_param=auswahl;
 			c2box_param=leer;
 			c4box_param=leer;
 			c6box_param=leer;
@@ -211,7 +222,7 @@ public class ErsterEntwurf extends JFrame {
 	
 	public ErsterEntwurf() {
 		setBackground(SystemColor.window);
-		setBounds(100, 100, 520, 500);
+		setBounds(100, 100, 650, 600);
 		BorderLayout borderLayout = new BorderLayout();
 		getContentPane().setLayout(borderLayout);
 		contentPanel.setBackground(SystemColor.window);
@@ -230,16 +241,15 @@ public class ErsterEntwurf extends JFrame {
 		comboBox6.setVisible(false);
 		comboBox7.setVisible(false);
 		comboBox8.setVisible(false);
+		undOderBox1.setVisible(false);
+		undOderBox2.setVisible(false);
+		undOderBox3.setVisible(false);
 		textfeld.setVisible(false);
 		textfeld1.setVisible(false);
 		textfeld2.setVisible(false);
 		textfeld3.setVisible(false);
+		butschliessen.setVisible(false);
 		
-		
-		/* txtGesucht = new JTextField();
-		txtGesucht.setBounds(297, 56, 134, 28);
-		contentPanel.add(txtGesucht);
-		txtGesucht.setColumns(10);  */
 		
 		//Auswahlbox des Ergebnis:
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"--nicht ausgew\u00E4hlt--", "alles ausw\u00E4hlen", "Person", "Titel", "Produktionsjahr", "Film-/Serienrolle", "Mitarbeiterfunktion", "Filmgesellschaft"}));
@@ -252,6 +262,7 @@ public class ErsterEntwurf extends JFrame {
 			}
 		});
 		comboBox.setBounds(18, 58, 211, 27);
+		
 		
 		//Auswahlmoeglichkeiten d. erweiterten Suchenfelder in Abhaengigkeit des Ergebnis bestimmen:
 		comboBox.addActionListener(new ActionListener() {
@@ -268,7 +279,7 @@ public class ErsterEntwurf extends JFrame {
 		
 		//Trennungslinie von Hauptsuche und erweiterter Suche:
 		JSeparator separator = new JSeparator();
-		separator.setBounds(6, 97, 514, 20);
+		separator.setBounds(6, 86, 514, 20);
 		contentPanel.add(separator);
 		
 		//Ueberschrift Suchanfrage:
@@ -281,7 +292,7 @@ public class ErsterEntwurf extends JFrame {
 		
 		//1.Reihe links
 		comboBox1.setBackground(UIManager.getColor("Button.background"));
-		comboBox1.setBounds(19, 155, 170, 27);
+		comboBox1.setBounds(119, 155, 170, 27);
 		comboBox1.addActionListener(new ActionListener() {
 			
 			@Override
@@ -319,7 +330,7 @@ public class ErsterEntwurf extends JFrame {
 		contentPanel.add(comboBox1);
 		
 		//1.Reihe mitte
-		comboBox2.setBounds(201, 155, 173, 27);
+		comboBox2.setBounds(301, 155, 173, 27);
 		comboBox2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
@@ -331,7 +342,7 @@ public class ErsterEntwurf extends JFrame {
 	
 		
 		//2.Reihe links
-		comboBox3.setBounds(19, 194, 170, 27);
+		comboBox3.setBounds(119, 192, 170, 27);
 		
 		comboBox3.addActionListener(new ActionListener() {
 			
@@ -370,7 +381,7 @@ public class ErsterEntwurf extends JFrame {
 		contentPanel.add(comboBox3);
 		
 		//2. Reihe mitte
-		comboBox4.setBounds(201, 195, 173, 27);
+		comboBox4.setBounds(301, 194, 173, 27);
 		comboBox4.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
@@ -381,7 +392,7 @@ public class ErsterEntwurf extends JFrame {
 		contentPanel.add(comboBox4);
 		
 		//3. Reihe links
-		comboBox5.setBounds(19, 234, 170, 27);
+		comboBox5.setBounds(119, 233, 170, 27);
 		comboBox5.addActionListener(new ActionListener() {
 			
 			@Override
@@ -419,7 +430,7 @@ public class ErsterEntwurf extends JFrame {
 		contentPanel.add(comboBox5);
 		
 		//3.Reihe mitte
-		comboBox6.setBounds(201, 234, 173, 27);
+		comboBox6.setBounds(301, 233, 173, 27);
 		comboBox6.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
@@ -430,7 +441,7 @@ public class ErsterEntwurf extends JFrame {
 		contentPanel.add(comboBox6);
 		
 		//4. Reihe links
-		comboBox7.setBounds(19, 273, 170, 27);
+		comboBox7.setBounds(119, 272, 170, 27);
 		
 		comboBox7.addActionListener(new ActionListener() {
 			
@@ -469,7 +480,7 @@ public class ErsterEntwurf extends JFrame {
 		contentPanel.add(comboBox7);
 		
 		//4. Reihe mitte
-		comboBox8.setBounds(201, 273, 173, 27);
+		comboBox8.setBounds(301, 271, 173, 27);
 		comboBox8.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e){
@@ -482,7 +493,7 @@ public class ErsterEntwurf extends JFrame {
 		
 		//Textfelder 
 		//Haupt-Suchfeld
-		suchfeld.setBounds(259, 58, 170, 27);
+		suchfeld.setBounds(301, 56, 170, 27);
 		suchfeld.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
@@ -496,7 +507,7 @@ public class ErsterEntwurf extends JFrame {
 		
 		//erweiterte_Sucheinstellungsfelder
 		//1.Feld 
-		textfeld.setBounds(386, 155, 134, 28);
+		textfeld.setBounds(495, 153, 134, 28);
 		textfeld.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
@@ -515,12 +526,12 @@ public class ErsterEntwurf extends JFrame {
 				 eigenschaftEingabe1=zwischenfeld.getText();
 			}
 		});
-		textfeld1.setBounds(386, 195, 134, 28);
+		textfeld1.setBounds(495, 192, 134, 28);
 		contentPanel.add(textfeld1);
 		textfeld1.setColumns(10);
 		
 		//3.Feld
-		textfeld2.setBounds(386, 234, 134, 28);
+		textfeld2.setBounds(495, 231, 134, 28);
 		textfeld2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -532,7 +543,7 @@ public class ErsterEntwurf extends JFrame {
 		textfeld2.setColumns(10);
 		
 		//4.Feld
-		textfeld3.setBounds(386, 273, 134, 28);
+		textfeld3.setBounds(495, 269, 134, 28);
 		textfeld3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
@@ -545,7 +556,7 @@ public class ErsterEntwurf extends JFrame {
 		
 		//Ueberschriften
 		JLabel lblStichwort = new JLabel("Stichwort:");
-		lblStichwort.setBounds(259, 30, 88, 16);
+		lblStichwort.setBounds(301, 30, 88, 16);
 		contentPanel.add(lblStichwort);
 		
 		JLabel lblErgebnistyp = new JLabel("Ergebnistyp:");
@@ -556,7 +567,7 @@ public class ErsterEntwurf extends JFrame {
 		
 		JButton but_erweiterteSuche = new JButton("erweiterte Sucheinstellung");
 		but_erweiterteSuche.setBackground(Color.WHITE);
-		but_erweiterteSuche.setBounds(42, 107, 187, 36);
+		but_erweiterteSuche.setBounds(18, 97, 187, 36);
 		but_erweiterteSuche.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -568,10 +579,14 @@ public class ErsterEntwurf extends JFrame {
 				comboBox6.setVisible(true);
 				comboBox7.setVisible(true);
 				comboBox8.setVisible(true);
+				undOderBox1.setVisible(true);
+				undOderBox2.setVisible(true);
+				undOderBox3.setVisible(true);
 				textfeld.setVisible(true);
 				textfeld1.setVisible(true);
 				textfeld2.setVisible(true);
 				textfeld3.setVisible(true);
+				butschliessen.setVisible(true);
 			
 			}
 		});
@@ -579,9 +594,9 @@ public class ErsterEntwurf extends JFrame {
 		
 		
 		
-		JButton butschliessen = new JButton("Schliessen");
+		
 		butschliessen.setBackground(Color.WHITE);
-		butschliessen.setBounds(292, 107, 101, 36);
+		butschliessen.setBounds(217, 97, 255, 36);
 		butschliessen.addActionListener(new ActionListener() {
 				
 		@Override
@@ -594,10 +609,14 @@ public class ErsterEntwurf extends JFrame {
 			comboBox6.setVisible(false);
 			comboBox7.setVisible(false);
 			comboBox8.setVisible(false);
+			undOderBox1.setVisible(false);
+			undOderBox2.setVisible(false);
+			undOderBox3.setVisible(false);
 			textfeld.setVisible(false);
 			textfeld1.setVisible(false);
 			textfeld2.setVisible(false);
 			textfeld3.setVisible(false);
+			butschliessen.setVisible(false);
 			eigenschaftEingabe=null;
 			eigenschaftEingabe1=null;
 			eigenschaftEingabe2=null;
@@ -617,21 +636,22 @@ public class ErsterEntwurf extends JFrame {
 		}); 
 		contentPanel.add(butschliessen);
 		
-		butSuchestarten.setBounds(251, 377, 117, 36);
+		butSuchestarten.setBounds(374, 360, 205, 36);
 		butSuchestarten.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
 				//Methodenaufruf und Parameteruebergabe:
 				LinkedList<String> erstezeile=new LinkedList<String>();
-				String[] einlesen1={c1suchfeld, c2suchfeld, eigenschaftEingabe};
+				String[] einlesen1={"",c1suchfeld, c2suchfeld, eigenschaftEingabe};
 				LinkedList<String> zweitezeile=new LinkedList<String>();
-				String[] einlesen2={c3suchfeld, c4suchfeld, eigenschaftEingabe1};
+				String[] einlesen2={undoderAuswahl1, c3suchfeld, c4suchfeld, eigenschaftEingabe1};
 				LinkedList<String> drittezeile=new LinkedList<String>();
-				String[] einlesen3={c5suchfeld, c6suchfeld, eigenschaftEingabe2};
+				String[] einlesen3={undoderAuswahl2, c5suchfeld, c6suchfeld, eigenschaftEingabe2};
 				LinkedList<String> viertezeile=new LinkedList<String>();
-				String[] einlesen4={c7suchfeld, c8suchfeld, eigenschaftEingabe3};
+				String[] einlesen4={undoderAuswahl3, c7suchfeld, c8suchfeld, eigenschaftEingabe3};
+				
 				int i;
-				for(i=0; i<3; i++){
+				for(i=0; i<4; i++){
 						erstezeile.add(i, einlesen1[i]);
 						zweitezeile.add(i, einlesen2[i]);
 						drittezeile.add(i, einlesen3[i]);
@@ -653,7 +673,7 @@ public class ErsterEntwurf extends JFrame {
 		
 		
 		
-		butBenutzerdaten.setBounds(42, 377, 100, 36);
+		butBenutzerdaten.setBounds(18, 466, 88, 36);
 		butBenutzerdaten.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
@@ -663,8 +683,52 @@ public class ErsterEntwurf extends JFrame {
 		});
 		contentPanel.add(butBenutzerdaten);
 		
-		butHilfe.setBounds(380, 377, 90, 36);
+		butHilfe.setBounds(593, 360, 36, 36);
 		contentPanel.add(butHilfe);
+		
+		
+		undOderBox1.setModel(new DefaultComboBoxModel(undoder));
+		undOderBox1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JComboBox zwischenbox = new JComboBox();
+				zwischenbox=(JComboBox) e.getSource();
+				undoderAuswahl1=(zwischenbox.getSelectedItem()).toString();
+				
+				
+			}
+		});
+		undOderBox1.setBounds(18, 194, 89, 27);
+		contentPanel.add(undOderBox1);
+		
+		undOderBox2.setModel(new DefaultComboBoxModel(undoder));
+		undOderBox2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JComboBox zwischenbox=new JComboBox();
+				zwischenbox=(JComboBox) e.getSource();
+				undoderAuswahl2=(zwischenbox.getSelectedItem()).toString();
+			}
+		});
+		undOderBox2.setBounds(18, 233, 89, 27);
+		contentPanel.add(undOderBox2);
+		
+		undOderBox3.setModel(new DefaultComboBoxModel(undoder));
+		undOderBox3.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JComboBox zwischenbox=new JComboBox();
+				zwischenbox=(JComboBox) e.getSource();
+				undoderAuswahl3=(zwischenbox.getSelectedItem()).toString();			}
+		});
+		undOderBox3.setBounds(18, 272, 88, 27);
+		contentPanel.add(undOderBox3);
+		btnMerklisteBearbeiten.setBounds(119, 466, 162, 36);
+		
+		contentPanel.add(btnMerklisteBearbeiten);
+		btnNewButton.setBounds(293, 468, 137, 33);
+		
+		contentPanel.add(btnNewButton);
 		
 		
 		{
