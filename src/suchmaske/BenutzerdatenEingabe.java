@@ -52,44 +52,54 @@ public class BenutzerdatenEingabe extends JFrame {
 		hostnamefeld.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				/*
 				JTextField zwischenfeld=new JTextField();
 				zwischenfeld=(JTextField) e.getSource();
 				hostname=zwischenfeld.getText();
+				*/
 			}
 		});
 		getContentPane().add(hostnamefeld);
 		hostnamefeld.setColumns(10);
+		hostnamefeld.setText("dbvm07.iai.uni-bonn.de");
 		
-		
+	
 		portfeld.setBounds(133, 81, 214, 28);
 		portfeld.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
+				/*
 				JTextField zwischenfeld=new JTextField();
 				zwischenfeld=(JTextField) e.getSource();
 				port=zwischenfeld.getText();
+				*/
 			}
 		});
 		getContentPane().add(portfeld);
 		portfeld.setColumns(10);
+		portfeld.setText("1521");
 		
 		
 		sidfeld.setBounds(133, 121, 214, 28);
 		sidfeld.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				/*
 				JTextField zwischenfeld=(JTextField) e.getSource();
 				sid=zwischenfeld.getText();
+				*/
 			}
 		});
 		getContentPane().add(sidfeld);
 		sidfeld.setColumns(10);
+		sidfeld.setText("lehre");
 		
 		
 		benutzernamefeld.setBounds(133, 161, 214, 28);
 		benutzernamefeld.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				/*
 				JTextField zwischentext=(JTextField) e.getSource();
 				try {
 				benutzername=zwischentext.getText();
@@ -97,17 +107,21 @@ public class BenutzerdatenEingabe extends JFrame {
 				catch(Exception ex) {
 					ex.printStackTrace();
 				}
+				*/
 			}
 		});
 		getContentPane().setLayout(null);
 		getContentPane().add(benutzernamefeld);
 		benutzernamefeld.setColumns(10);
+		benutzernamefeld.setText("s6paseun");
+		
 		
 		
 		passwortfeld.setBounds(133, 201, 214, 28);
 		passwortfeld.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
+				/*
 				JPasswordField zwischenpasswort=new JPasswordField();
 				zwischenpasswort = (JPasswordField) e.getSource();
 				try {
@@ -116,9 +130,11 @@ public class BenutzerdatenEingabe extends JFrame {
 				catch (Exception ex) {
 					ex.printStackTrace();
 				}
+				*/
 			}
 		});
 		getContentPane().add(passwortfeld);
+		passwortfeld.setText("ps51uSio");
 		
 		//Labels:
 		
@@ -158,9 +174,16 @@ public class BenutzerdatenEingabe extends JFrame {
 			public void actionPerformed(ActionEvent e){
 				try{
 				String passwortString=String.valueOf(passwort);
+				
 				//Connection verbindung=new Connection();
-				boolean verbunden=false;
-				//boolean verbunden=verbindung.login(hostname, port, sid, benutzername, passwort);
+				//boolean verbunden=false;
+				System.out.println(hostnamefeld.getText() + " " + portfeld.getText() + " " +
+						sidfeld.getText() + " "  + benutzernamefeld.getText() + " " +
+						String.valueOf(passwortfeld.getPassword()));
+				boolean verbunden = control.Control.login(
+				  hostnamefeld.getText(), portfeld.getText(), sidfeld.getText(), 
+				    benutzernamefeld.getText(),
+				    String.valueOf(passwortfeld.getPassword()));
 				bestaetigeVerbindung=new LoginBestaetigung(verbunden);
 				bestaetigeVerbindung.setVisible(true);
 				

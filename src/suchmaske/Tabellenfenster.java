@@ -11,6 +11,8 @@ import javax.swing.JTable;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class Tabellenfenster extends JFrame {
 	
@@ -18,6 +20,8 @@ public class Tabellenfenster extends JFrame {
 	private JTable ergebnistabelle;
 	private int zeilenanzahl;
 	private int spaltenanzahl;
+	private int clickedrow;
+	private int clickedcolumn;
 	
 	private LinkedList<LinkedList<String>> ergebnisliste;
 	 
@@ -43,11 +47,33 @@ public class Tabellenfenster extends JFrame {
 		ergebnistabelle.setForeground(Color.BLACK);
 		ergebnistabelle.setGridColor(Color.BLACK);
 		tabellefuellen();
-		ergebnistabelle.setAutoscrolls(true);
-		
+		ergebnistabelle.addMouseListener(new MouseListener(){
+			@Override
+			public void mouseClicked(MouseEvent e){
+				clickedcolumn=e.getX();
+				clickedrow=e.getY();
+				
+			}
+			@Override
+			public void mouseEntered(MouseEvent e){
+				
+			}
+			@Override public void mouseExited(MouseEvent e){
+				
+			}
+			@Override 
+			public void mouseReleased(MouseEvent e){
+				
+			}
+			@Override 
+			public void mousePressed(MouseEvent e){
+				
+			}
+		});
 		getContentPane().add(ergebnistabelle);
 	}
-
+	
+	@Override
 	
 	
 	private void tabellefuellen(){

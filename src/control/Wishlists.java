@@ -6,14 +6,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 
-class Wishlists {
+public class Wishlists {
   private static LinkedList<String> lists = new LinkedList<String>();
 
   static LinkedList<String> getLists() {
 	return lists;
   }
   
-  static void createList(String listname) throws IllegalArgumentException{
+  public static void createList(String listname) throws IllegalArgumentException{
 	 if(lists.contains(listname)){
 	   throw new IllegalArgumentException("List with this name allready" +
 	   		" exists.");
@@ -30,7 +30,7 @@ class Wishlists {
 	 }
   }
   
-  static void removeList(String listname){
+ public static void removeList(String listname){
 	 lists.remove(listname);
 	 try{
 	   java.sql.Connection conn = Connection.getConn();
@@ -42,7 +42,7 @@ class Wishlists {
 	 }
   }
   
-  static LinkedList<String> showList(String listname){
+  public static LinkedList<String> showList(String listname){
     try{
 	  java.sql.Connection conn = Connection.getConn();
 	  Statement stmt = conn.createStatement();
@@ -61,7 +61,7 @@ class Wishlists {
 	}  	  
   }
  
-  static void addToList(String listname, String entry){
+  public static void addToList(String listname, String entry){
     try{
       java.sql.Connection conn = Connection.getConn();
       Statement stmt = conn.createStatement();
@@ -74,7 +74,7 @@ class Wishlists {
     }
   }
   
-  static void removeFromList(String listname, String entry){
+  public static void removeFromList(String listname, String entry){
     try{
 	  java.sql.Connection conn = Connection.getConn();
 	  Statement stmt = conn.createStatement();
